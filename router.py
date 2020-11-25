@@ -1,11 +1,9 @@
 from fastapi import FastAPI
-from pydantic import BaseModel
+import pydantic
 import databases
 import sqlalchemy
 import uvicorn
-from tortois import field
 
-from tortois.models import Model
 import requests
 
 
@@ -25,6 +23,8 @@ app=FastAPI()
 @app.get("/users")
 async def get_users():
     return tb_user
+
+
 @app.post("/users")
 async def create_user(user:User):
     tb_user.append(user.dict())
