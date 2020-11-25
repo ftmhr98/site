@@ -1,5 +1,5 @@
 from fastapi import FastAPI
-import pydantic
+from pydantic import BaseModel, ValidationError, validator
 import databases
 import sqlalchemy
 import uvicorn
