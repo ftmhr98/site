@@ -38,12 +38,12 @@ async def create_user(user: User):
 
 
 
-@app.get("/Coupone")
+@app.get("/coupone")
 async def get_coupon():
     return tb_coupon
 
 
-@app.post("/Coupone")
+@app.post("/coupone")
 async def create_coupon(coupon: Coupon):
     tb_coupon.append(coupon.dict())
     return coupon
