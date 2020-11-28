@@ -7,11 +7,7 @@ db = mysql.connector.connect(
     database="sitedb"
 )
 mycursor = db.cursor()
-user = [
-    ('ftm', '@1234567890', 'exam@char.com'),
-    ('mhm', '@mhm1254', 'trt@gm.com'),
-    ('zhra', 'zhr091', 'utr@ya.com')
-]
+
 pers = [
     ("add coupon",),
     ("add user",),
