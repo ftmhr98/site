@@ -1,16 +1,22 @@
-from fastapi import FastAPI
 import database
-import router
 
-def get_user(users):
+
+def get_user():
     if users == database.user:
         return users
     else:
-        return "faild"
+        return "failed"
 
 
-def check_per(userper):
-    if userper == database.User_permission:
-        return userper
+def check_permision(permision):
+    if permision == database.User_permission.id:
+        return permision
     else:
-        return "faild"
+        return "failed"
+
+
+def check_coupone(coupones):
+    if coupones == database.Coupone.id:
+        return coupones
+    else:
+        return "failed"

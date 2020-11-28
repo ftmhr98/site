@@ -80,3 +80,4 @@ q3_coupones = ("INSERT INTO Coupone (coupon_name,user_coupon) VALUES  (%s,%S)")
 Database.execute(q3_coupones)
 
 Database.fetchall()
+Database.close()

@@ -1,6 +1,3 @@
-from fastapi import FastAPI
-import router
-
 salt = "dsfdsfsdfvdsvdsv"
 
 
