@@ -1,5 +1,8 @@
 from fastapi import FastAPI
 import router
-def get_hash(str):
-    pas_hashed=str(hash(router.pas))
-    return pas_hashed
+
+salt = "dsfdsfsdfvdsvdsv"
+
+
+def get_hash(text):
+    return str(hash(text + salt))
