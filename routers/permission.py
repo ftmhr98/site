@@ -4,7 +4,7 @@ import uvicorn
 
 
 class permission(BaseModel):
-    name: str
+    permis: str
 
 
 tb_per = []
