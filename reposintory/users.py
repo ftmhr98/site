@@ -1,23 +1,15 @@
 import database
-from  routers import  user
-
+from  routers import  user,coupone,permission
+from reposintory import  mysql
 def get_user(users):
-    #users = user.log_users???
-    if users == database.user:
-        return users
-    else:
-        return "failed"
+    pass
+
+
 
 
 def check_permision(permision):
-    if permision == database.User_permission.id:
-        return permision
-    else:
-        return "failed"
+    pass
 
 
 def check_coupone(coupones):
-    if coupones == database.Coupone.id:
-        return coupones
-    else:
-        return "failed"
+   pass

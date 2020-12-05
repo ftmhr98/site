@@ -1,5 +1,5 @@
 from fastapi import FastAPI
-from pydantic import BaseModel, ValidationError, validator
+from pydantic import BaseModel
 import uvicorn
 
 
@@ -20,7 +20,7 @@ async def get_coupon():
 @app.post("/coupone")
 async def create_coupon(coupon: Coupon):
     tb_coupon.append(coupon.dict())
-    return coupon
+    return tb_coupon
 
 
 if __name__ == "__main__":

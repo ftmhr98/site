@@ -1,5 +1,5 @@
 from fastapi import FastAPI
-from pydantic import BaseModel, ValidationError, validator
+from pydantic import BaseModel
 
 
 class UserBase(BaseModel):

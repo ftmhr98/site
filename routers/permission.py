@@ -1,5 +1,5 @@
 from fastapi import FastAPI
-from pydantic import BaseModel, ValidationError, validator
+from pydantic import BaseModel
 import uvicorn
 
 
@@ -11,10 +11,10 @@ tb_per = []
 app = FastAPI()
 
 
-@app.get("/permis")
-async def check_permission(permis: permission):
-    tb_per.append(permis.dict())
-    return permis
+@app.get("/permiss/")
+async def check_permission(permiss: permission):
+    tb_per.append(permiss.dict())
+    return tb_per
 
 
 if __name__ == "__main__":
