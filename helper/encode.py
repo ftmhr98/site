@@ -5,31 +5,29 @@ from helper import decode
 from fastapi import FastAPI, requests
 import uvicorn
 
-SECRET_KEY = "hkBxrbZ9Td4QEwgRewV6gZSVH4q78vBia4GBYuqd09SsiMsIjH"
-
 app = FastAPI()
 
 
 @app.post('/loginEndpoint')
-def loginFunction():
+def login_function():
     username = requests.form.get('name')
     password = requests.form.get('password')
 
-    timeLimit = datetime.datetime.utcnow() + datetime.timedelta(minutes=30)  # set limit for user
-    payload = {"user_id": username, "exp": timeLimit}
+    time_limit = datetime.datetime.utcnow() + datetime.timedelta(minutes=30)  # set limit for user
+    payload = {"user_id": username, "exp": time_limit}
     token = jwt.encode(payload, decode.SECRET_KEY)
     return_data = {
         "error": "0",
         "message": "Successful",
         "token": token.decode("UTF-8"),
-        "Elapse_time": f"{timeLimit}"
+        "Elapse_time": f"{time_limit}"
     }
     return app.response_class(response=json.dumps(return_data), mimetype='application/json')
 
 
 @app.post('/anEndpoint')
 @decode.token_required  # Verify token decorator
-def aWebService():
+def web_service():
     return_data = {
         "error": "0",
         "message": "You Are verified"

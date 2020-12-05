@@ -12,8 +12,7 @@ app = FastAPI()
 
 
 @app.get("/permiss/")
-async def check_permission(permiss: permission):
-    tb_per.append(permiss.dict())
+async def check_permission():
     return tb_per
 
 
