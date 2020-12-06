@@ -7,6 +7,10 @@ class Coupon(BaseModel):
     name: str
 
 
+class user_coupone(Coupon):
+    user_id: int
+
+
 tb_coupon = []
 
 app = FastAPI()
@@ -21,6 +25,11 @@ async def get_coupon():
 async def create_coupon(coupon: Coupon):
     tb_coupon.append(coupon.dict())
     return tb_coupon
+
+
+@app.put("/coupone")
+async def add_user(user: user_coupone):
+    pass
 
 
 if __name__ == "__main__":
