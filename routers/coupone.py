@@ -8,7 +8,7 @@ class Coupon(BaseModel):
 
 
 class User_coupone(BaseModel):
-   # user_id: int
+    # user_id: int
     coupone_id: int
 
 
