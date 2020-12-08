@@ -24,12 +24,11 @@ async def create_user(user_in: user_model.UserIn):
     return tb_user
 
 
-@app.post("/users")
+@app.post("/users_login")
 async def log_in(user_in: user_model.UserIn):
     user_name = user_model.UserIn.name
     password = user_model.UserIn.password
     hasshed_password = hash.get_hash(password)
-    print(user_name, hasshed_password)
     return user_name, hasshed_password
 
 
