@@ -1,4 +1,4 @@
-import database
+
 import mysql.connector
 
 cnx = mysql.connector.connect(user='root', password='@27061378',

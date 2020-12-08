@@ -15,9 +15,7 @@ def save_user(user_in: user_model.UserIn):
     hashed_password = hash.get_hash(user_in.password)
     user_in_db = user_model.UserInDB(**user_in.dict(), hashed_password=hashed_password)
     return user_in_db
-@app.get("/users")
-async def log_users():
-    return tb_user
+
 
 @app.post("/users")
 async def create_user(user_in: user_model.UserIn):
@@ -26,7 +24,13 @@ async def create_user(user_in: user_model.UserIn):
     return tb_user
 
 
-
+@app.post("/users")
+async def log_in(user_in: user_model.UserIn):
+    user_name = user_model.UserIn.name
+    password = user_model.UserIn.password
+    hasshed_password = hash.get_hash(password)
+    print(user_name, hasshed_password)
+    return user_name, hasshed_password
 
 
 if __name__ == "__main__":

@@ -4,7 +4,7 @@ from pydantic import BaseModel
 
 class UserBase(BaseModel):
     name: str
-    email: str
+
 
 
 class UserIn(UserBase):
@@ -13,10 +13,6 @@ class UserIn(UserBase):
 
 class UserInDB(UserBase):
     hashed_password: str
-
-
-class UserOut(UserBase):
-    pass
 
 
 app = FastAPI()

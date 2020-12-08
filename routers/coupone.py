@@ -7,12 +7,13 @@ class Coupon(BaseModel):
     name: str
 
 
-class user_coupone(Coupon):
-    user_id: int
+class user_coupone(BaseModel):
+   # user_id: int
+    coupone_id: int
 
 
 tb_coupon = []
-
+tb_usercoupone = []
 app = FastAPI()
 
 
@@ -27,9 +28,10 @@ async def create_coupon(coupon: Coupon):
     return tb_coupon
 
 
-@app.put("/coupone")
-async def add_user(user: user_coupone):
-    pass
+@app.post("/user_coupone")
+async def create_usercoupone(user_coupone: user_coupone):
+    tb_usercoupone.append(user_coupone.dict())
+    return tb_usercoupone
 
 
 if __name__ == "__main__":

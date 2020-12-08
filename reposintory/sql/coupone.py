@@ -1,17 +1,18 @@
 import database
 from routers import user, coupone, permission
-from reposintory import sql, mysql
+from reposintory import sql, mysql1
 
-q1_coupones = ("SELECT coupon_name,user_coupon FROM Coupone")
-
-q2_coupones = ("INSERT INTO Coupone (coupon_name) VALUES  (%s)")
-q3_coupones =("UPDATE  Coupone SET user_coupone = %S WHERE coupon_name = %S")
-
+q1_coupones = ("INSERT INTO Coupone (coupon_name) VALUES  (%s)")
+q2_coupones = ("INSERT INTO user_coupone(coupon_id,user_id)VALUES (%s,%s)")
+q3_copones = ("SELECT ")
 coupone_params = coupone.get_coupon
-coupone_log = mysql.Database.query(database, q1_coupones)
+# coupone_log = mysql1.Database.query(q1_coupones)
+user_id = sql.users.pass_user()
 
 
 def save_coupone():
-    mysql.Database.query(database, q2_coupones, coupone.create_coupon)
+    mysql1.Database.query(q1_coupones, coupone.create_coupon, )
+
+
 def save_user():
-    mysql.Database.query(database,q3_coupones,)
+    mysql1.Database.query(database, q2_coupones, (user_id, coupone.create_usercoupone))
