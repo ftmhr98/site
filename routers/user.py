@@ -15,7 +15,7 @@ app = FastAPI()
 access_token_minutes = 30
 
 
-def save_user(user_in: user_model.UserIn):
+def save(user_in: user_model.UserIn):
     hashed_password = hash.get_hash(user_in.password)
     user_in_db = user_model.UserInDB(**user_in.dict(), hashed_password=hashed_password)
     return user_in_db
@@ -36,7 +36,7 @@ def creat_token(user_id, expires_delta: Optional[timedelta] = None):
 @app.post("/users")
 async def create_user(user_in: user_model.UserIn):
     hashed_password = hash.get_hash(user_in.password)
-    tb_user = save_user(user_in)
+    tb_user = save(user_in)
     print((user_in.name, hashed_password))
     users.save_user(user_in.name, hashed_password)
     return tb_user
