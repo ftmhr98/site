@@ -1,14 +1,15 @@
 from fastapi import FastAPI
-from pydantic import BaseModel, ValidationError, validator
 from routers import user_model
 from helper import hash_tools as hash
 import uvicorn
 from typing import Optional
 from helper.encode_decode import get_encode, get_decode
+from reposintory.sql import users
 import database
 import requests
 from datetime import datetime, timedelta
 import jwt
+from reposintory.sql import users
 
 tb_user = []
 
@@ -42,11 +43,11 @@ async def create_user(user_in: user_model.UserIn):
 
 
 @app.post("/users_login")
-async def log_in(user_in: user_model.UserIn):
-    user_name = user_model.UserIn.name
-    password = user_model.UserIn.password
+async def log_in(user: user_model.UserIn):
+    user_name = user.name
+    password = user.password
     hasshed_password = hash.get_hash(password)
-
+    # creat_token(users.pass_user())
     return user_name, hasshed_password
 
 
