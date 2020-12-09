@@ -4,9 +4,7 @@ from helper import hash_tools as hash
 import uvicorn
 from typing import Optional
 from helper.encode_decode import get_encode, get_decode
-from reposintory.sql import users
-import database
-import requests
+
 from datetime import datetime, timedelta
 import jwt
 from reposintory.sql import users
@@ -39,6 +37,8 @@ def creat_token(user_id, expires_delta: Optional[timedelta] = None):
 async def create_user(user_in: user_model.UserIn):
     hashed_password = hash.get_hash(user_in.password)
     tb_user = save_user(user_in)
+    print((user_in.name, hashed_password))
+    users.save_user(user_in.name, hashed_password)
     return tb_user
 
 

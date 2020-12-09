@@ -11,10 +11,11 @@ q3_user_permission = "SELECT permission_id FROM User_permission WHERE user_id = 
 permission_params = user_permission.check_user_permission
 # permission_log = mysql.Database.query(database, q2_user_permission)
 tb_access = []
-database_objct=mysql1.Database
+database_objct = mysql1.Database
+
 
 def save_permission(permission_in):
-    database_objct.query(q2_user_permission,permission_in )
+    database_objct.query(q2_user_permission, permission_in)
 
 
 def check_permission(user_id):

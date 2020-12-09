@@ -7,10 +7,7 @@ class Database:
                                              host='localhost',
                                              database='sitedb')
 
-        print(self._conn)
-
         self._cursor = self._conn.cursor()
-        print(self._cursor)
 
     def __enter__(self):
         return self
@@ -50,25 +47,12 @@ class Database:
         cursors.execute(query, params)
         conn.commit()
 
-        # fe = self.cursor.fetchall()
-        #
-        # print(params)
-        # print(fe)
     @staticmethod
-    def execute(query,params):
+    def execute(query, params):
         conn = mysql.connector.connect(user='root', password='@27061378',
                                        host='localhost',
                                        database='sitedb')
         cursors = conn.cursor()
         cursors.execute(query, params)
-        resualt=cursors.fetchall()
+        resualt = cursors.fetchall()
         return resualt
-
-
-"""""
-    def get_connection(self):
-        if self.connection is None:
-            self._conn = mysql.connect()
-        else:
-            mysql.connector.connect().close()
-"""
