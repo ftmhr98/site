@@ -45,9 +45,12 @@ async def create_user(user_in: user_model.UserIn):
 async def log_in(user: user_model.UserIn):
     user_name = user.name
     password = user.password
-    hasshed_password = hash.get_hash(password)
-    # creat_token(users.pass_user())
-    return user_name, hasshed_password
+    hashed_password = hash.get_hash(password)
+    print(user_name)
+    print(hashed_password)
+    users.pass_user(user_name, hashed_password)
+
+    return user_name, hashed_password
 
 
 if __name__ == "__main__":
