@@ -17,3 +17,4 @@ mycursor.execute("CREATE TABLE User_permission(id INT AUTO_INCREMENT PRIMARY KEY
 mycursor.execute("CREATE TABLE Coupone(id INT AUTO_INCREMENT PRIMARY KEY,coupon_name VARCHAR(255))")
 mycursor.execute("CREATE TABLE user_coupone(id INT AUTO_INCREMENT PRIMARY KEY, user_id INT,coupon_name VARCHAR(255)) ")
 """
+

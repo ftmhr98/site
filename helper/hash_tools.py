@@ -1,3 +1,6 @@
+import hashlib
 salt = "dsfdsfsdfvdsvdsv"
 def get_hash(text):
-    return str(hash(text + salt))
+    result = hashlib.md5(text.encode())
+    return result.hexdigest()
+
