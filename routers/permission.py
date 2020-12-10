@@ -1,13 +1,16 @@
 from fastapi import FastAPI
 from pydantic import BaseModel
 import uvicorn
+from reposintory.sql import permission
 
 
-class permission(BaseModel):
-    permis: str
+class Permissions(BaseModel):
+    user_id: int
+    permission_id: int
 
 
-tb_per = []
+tb_per = {"user_id": 0,
+          "id_permission": 0}
 app = FastAPI()
 
 
@@ -17,8 +20,12 @@ async def check_permission():
 
 
 @app.post("/permiss")
-async def creat_permission(permiss: permission):
-    tb_per.append(permiss.dict())
+async def creat_permission(permiss: Permissions):
+    tb_per["user_id"] = (permiss.user_id)
+    tb_per["id_permission"] = (permiss.permission_id)
+    print(tb_per.get("user_id"))
+    print(tb_per.get("id_permission"))
+    permission.save_permission(tb_per.get("user_id"), tb_per.get("id_permission"))
     return tb_per
 
 

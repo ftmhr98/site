@@ -23,10 +23,6 @@ async def create_coupon(coupon: coupon_model.Coupon):
 async def create_usercoupone(user_coupone: coupon_model.User_coupone):
     tb_usercoupone["name"] = (user_coupone.name)
     tb_usercoupone["user_id"] = (user_coupone.user_id)
-    couppon_name = (tb_usercoupone.get("name"))
-
-    user_id = (tb_usercoupone.get("user_id"))
-
     coupone.save_user(tb_usercoupone.get("user_id"), tb_usercoupone.get("name"))
     return tb_usercoupone
 
