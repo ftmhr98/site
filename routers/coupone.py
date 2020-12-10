@@ -1,36 +1,33 @@
 from fastapi import FastAPI
 from pydantic import BaseModel
 import uvicorn
+from reposintory.sql import coupone
+from routers import coupon_model
 
-
-class Coupon(BaseModel):
-    name: str
-
-
-class User_coupone(BaseModel):
-    # user_id: int
-    coupone_id: int
-
-
-tb_coupon = []
-tb_usercoupone = []
+tb_coupon = {"name": "value"}
+tb_usercoupone = {"name": "value",
+                  "user_id": 0}
 app = FastAPI()
 
 
-@app.get("/coupone")
-async def get_coupon():
-    return tb_coupon
-
-
 @app.post("/coupone")
-async def create_coupon(coupon: Coupon):
-    tb_coupon.append(coupon.dict())
+async def create_coupon(coupon: coupon_model.Coupon):
+    tb_coupon["name"] = (coupon.name)
+    print(tb_coupon)
+    print(tb_coupon.get("name"))
+    coupone.save_coupone(tb_coupon.get("name"))
     return tb_coupon
 
 
 @app.post("/user_coupone")
-async def create_usercoupone(user_coupone: User_coupone):
-    tb_usercoupone.append(user_coupone.dict())
+async def create_usercoupone(user_coupone: coupon_model.User_coupone):
+    tb_usercoupone["name"] = (user_coupone.name)
+    tb_usercoupone["user_id"] = (user_coupone.user_id)
+    couppon_name = (tb_usercoupone.get("name"))
+
+    user_id = (tb_usercoupone.get("user_id"))
+
+    coupone.save_user(tb_usercoupone.get("user_id"), tb_usercoupone.get("name"))
     return tb_usercoupone
 
 
