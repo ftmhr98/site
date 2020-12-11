@@ -4,9 +4,9 @@ from helper import hash_tools as hash
 import uvicorn
 from typing import Optional
 from helper.encode_decode import get_encode, get_decode
-
+from reposintory.rediss import token_set
 from datetime import datetime, timedelta
-import jwt
+
 from reposintory.sql import users
 
 tb_user = []
@@ -48,8 +48,7 @@ async def log_in(user: user_model.UserIn):
     hashed_password = hash.get_hash(password)
     id = users.pass_user(user_name, hashed_password)
     token = creat_token(id)
-    print(id)
-    print(token)
+    token_set(token)
     return token
 
 
