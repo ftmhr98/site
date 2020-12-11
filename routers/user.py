@@ -46,8 +46,8 @@ async def log_in(user: user_model.UserIn):
     user_name = user.name
     password = user.password
     hashed_password = hash.get_hash(password)
-    id = users.pass_user(user_name, hashed_password)
-    token = creat_token(id)
+    id_user = users.pass_user(user_name, hashed_password)
+    token = creat_token(id_user)
     token_set(token)
     return token
 
