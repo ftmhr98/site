@@ -1,4 +1,4 @@
-from reposintory import sql, mysql1
+from reposintory import  mysql1
 
 q1_coupone = "INSERT INTO Coupone (coupon_name) VALUE (%s)"
 q2_coupone = "INSERT INTO user_coupone(user_id , coupon_name) VALUES (%s,%s)"

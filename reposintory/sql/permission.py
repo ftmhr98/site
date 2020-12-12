@@ -23,7 +23,6 @@ def check_permission(user_id):
         permission_id = database_objct.execute(q3_user_permission, user_id)
     except PermissionError:
         print("YOU DONT HAVE PERMISSION FOR ANY THING")
-
         if (permission_id == 1):
             coupone.save_coupone()
         elif (permission_id == 2):
