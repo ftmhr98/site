@@ -57,6 +57,8 @@ class Database:
         cursors.execute(query, params)
         conn.commit()
 
+
+
     @staticmethod
     def execute(query, params):
         conn = mysql.connector.connect(user='root', password='@27061378',
@@ -64,5 +66,15 @@ class Database:
                                        database='sitedb')
         cursors = conn.cursor()
         cursors.execute(query, params)
+        resualt = cursors.fetchall()
+        return resualt
+
+    @staticmethod
+    def execute_1(query):
+        conn = mysql.connector.connect(user='root', password='@27061378',
+                                       host='localhost',
+                                       database='sitedb')
+        cursors = conn.cursor()
+        cursors.execute(query)
         resualt = cursors.fetchall()
         return resualt

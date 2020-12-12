@@ -22,7 +22,7 @@ async def check_permissions(token):
         id_user = get_id(token)
         permission.check_permission(id_user)
     else:
-        raise HTTPException(status_code=403, detail="Forbidden")
+        raise HTTPException(status_code=408, detail="Request Timeout")
 
 
 @app.post("/permiss")

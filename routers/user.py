@@ -37,7 +37,7 @@ def creat_token(user_id, expires_delta: Optional[timedelta] = None):
 async def create_user(user_in: user_model.UserIn):
     hashed_password = hash.get_hash(user_in.password)
     tb_user = save(user_in)
-    users.save_user(user_in.name, hashed_password)
+    print(users.save_user(user_in.name, hashed_password))
     return tb_user
 
 
