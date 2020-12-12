@@ -4,7 +4,7 @@ from reposintory import mysql1
 from reposintory.sql.users import save_user, pass_user
 from reposintory.sql import coupone
 
-q1_user_permission = "SELECT user_id,permission_id FROM User_permission"
+q1_user_permission = "SELECT * FROM User_permission"
 
 q2_user_permission = "INSERT INTO User_permission (user_id,permission_id) VALUES  (%s,%s)"
 q3_user_permission = "SELECT permission_id FROM User_permission WHERE user_id = %s"

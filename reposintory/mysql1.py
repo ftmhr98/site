@@ -48,7 +48,7 @@ class Database:
         conn.commit()
 
     @staticmethod
-    def query_2(query, params):
+    def query_2(query, *params):
         conn = mysql.connector.connect(user='root', password='@27061378',
                                        host='localhost',
                                        database='sitedb')
@@ -56,8 +56,6 @@ class Database:
         cursors = conn.cursor()
         cursors.execute(query, params)
         conn.commit()
-
-
 
     @staticmethod
     def execute(query, params):
