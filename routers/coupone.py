@@ -12,7 +12,7 @@ app = FastAPI()
 
 
 @app.post("/coupone")
-async def create_coupon(coupon: coupon_model.Coupon,token):
+async def create_coupon(coupon: coupon_model.Coupon, token):
     if rediss.token_get() == token:
         tb_coupon["name"] = (coupon.name)
         coupone.save_coupone(tb_coupon.get("name"))
