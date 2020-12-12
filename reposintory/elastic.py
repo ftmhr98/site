@@ -5,30 +5,8 @@ from reposintory import mysql1
 
 es = Elasticsearch(['127.0.0.1'],
                    port=9200)
-user_doc = {
-    "id": 0,
-    'name': 'username',
-    'pass': 'password'
-
-}
-permission_doc = {
-    "id ": 0,
-    'user_id': 0,
-    'permission_id': 0
-}
-user_coupone_doc = {
-    "id": 0,
-    'id_user': 0,
-    'coupone_name': "coupone"
-}
-coupone_doc = {
-    "id": 0,
-    "coupon_name": "value"
-
-}
 
 database_object = mysql1.Database()
-es.index(index="user_coupone-index", id=1, body=user_coupone_doc)
 
 
 def index_user():
@@ -46,7 +24,6 @@ def index_user():
         user['password'] = i[2]
         es.index(index="user-index", id=1, body=user)
         es.get(index="user-index", id=1)
-        # print(user_res['_source'])
 
 
 def index_permission():
@@ -96,4 +73,3 @@ def index_user_coupon():
         es.index(index="user_coupone-index", id=1, body=user_coupon)
 
         es.get(index='user_coupone-index', id=1)
-index_user_coupon()

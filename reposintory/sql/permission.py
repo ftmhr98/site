@@ -18,13 +18,17 @@ def save_permission(id_user, id_permission):
     database_objct.query_2(q2_user_permission, (id_user, id_permission))
 
 
-def check_permission(user_id):
+
+
+
+def check_permission_coupon(user_id, coupone_name):
     try:
         permission_id = database_objct.execute(q3_user_permission, user_id)
+        if (permission_id == 1):
+            coupone.save_coupone(coupone_name)
+        elif (permission_id == 2):
+            coupone.save_user(user_id, coupone_name)
     except PermissionError:
         print("YOU DONT HAVE PERMISSION FOR ANY THING")
-        if (permission_id == 1):
-            coupone.save_coupone()
-        elif (permission_id == 2):
-            save_user()
-            coupone.save_user(user_id)
+
+

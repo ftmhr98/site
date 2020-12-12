@@ -8,7 +8,7 @@ from reposintory.rediss import token_set
 from datetime import datetime, timedelta
 from authentication import auth
 from reposintory.sql import users
-
+from reposintory.sql import permission
 tb_user = []
 
 app = FastAPI()
@@ -49,7 +49,6 @@ async def log_in(user: user_model.UserIn):
     id_user = users.pass_user(user_name, hashed_password)
     token = creat_token(id_user)
     token_set(token)
-
     return token
 
 
