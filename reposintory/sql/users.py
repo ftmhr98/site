@@ -13,5 +13,5 @@ def save_user(name_user, user_password):
 
 
 def pass_user(user_in, pass_in):
-    resault = database_object.execute(q3_user, (user_in, pass_in))
+    resault = database_object.execute_1(q3_user, (user_in, pass_in))
     return resault

@@ -1,7 +1,7 @@
 from reposintory import  mysql1
 
 q1_coupone = "INSERT INTO Coupone (coupon_name) VALUE (%s)"
-q2_coupone = "INSERT INTO user_coupone(user_id , coupon_name) VALUES (%s,%s)"
+q2_coupone = "INSERT INTO user_coupone(user_id, coupon_name) VALUES (%s,%s)"
 q3_user_coupone = "SELECT * FROM user_coupone "
 q4_coupone="SELECT * FROM Coupone"
 database_obj = mysql1.Database

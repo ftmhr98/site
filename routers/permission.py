@@ -25,10 +25,12 @@ async def check_permissions(token):
         raise HTTPException(status_code=408, detail="Request Timeout")
 
 
-@app.post("/permiss")
-async def creat_permission(permiss: Permissions):
-    tb_per["user_id"] = (permiss.user_id)
-    tb_per["id_permission"] = (permiss.permission_id)
+@app.post("/permissions")
+async def creat_permission(permissions: Permissions):
+    tb_per["user_id"] = permissions.user_id
+
+    tb_per["id_permission"] = permissions.permission_id
+
     permission.save_permission(tb_per.get("user_id"), tb_per.get("id_permission"))
     return tb_per
 

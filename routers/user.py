@@ -27,7 +27,7 @@ def creat_token(user_id, expires_delta: Optional[timedelta] = None):
     if expires_delta:
         expire = datetime.utcnow() + expires_delta
     else:
-        expire = datetime.utcnow() + timedelta(minutes=15)
+        expire = datetime.utcnow() + timedelta(minutes=20)
     to_encode.update({"exp": expire})
     encode_id = get_encode(to_encode)
     return encode_id
@@ -49,6 +49,7 @@ async def log_in(user: user_model.UserIn):
     id_user = users.pass_user(user_name, hashed_password)
     token = creat_token(id_user)
     token_set(token)
+    print(token)
     return token
 
 

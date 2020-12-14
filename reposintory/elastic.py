@@ -17,7 +17,7 @@ def index_user():
         "name": "",
         "password": "value"
     }
-    s = (database_object.execute_1(users.q1_user))
+    s = (database_object.execute_elastic(users.q1_user))
     for i in s:
         user['id'] = i[0]
         user['name'] = i[1]
@@ -32,7 +32,7 @@ def index_permission():
         "user_id": 0,
         "permission_id": 0
     }
-    s = (database_object.execute_1(permission.q1_user_permission))
+    s = (database_object.execute_elastic(permission.q1_user_permission))
     for i in s:
         permissions['id'] = i[0]
         permissions['user_id'] = i[1]
@@ -47,7 +47,7 @@ def index_coupon():
         "id": 0,
         "coupon_name": "value"
     }
-    s = (database_object.execute_1(coupone.q4_coupone))
+    s = (database_object.execute_elastic(coupone.q4_coupone))
     for i in s:
         coupon['id'] = i[0]
         coupon['coupon_name'] = i[1]
@@ -63,7 +63,7 @@ def index_user_coupon():
         'id_user': 0,
         'coupone_name': "coupone"
     }
-    s = (database_object.execute_1(coupone.q3_user_coupone))
+    s = (database_object.execute_elastic(coupone.q3_user_coupone))
 
     for i in s:
         user_coupon['id'] = i[0]

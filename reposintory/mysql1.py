@@ -58,7 +58,7 @@ class Database:
         conn.commit()
 
     @staticmethod
-    def execute(query, params):
+    def execute(query, *params):
         conn = mysql.connector.connect(user='root', password='@27061378',
                                        host='localhost',
                                        database='sitedb')
@@ -68,7 +68,17 @@ class Database:
         return resualt
 
     @staticmethod
-    def execute_1(query):
+    def execute_1(query, params):
+        conn = mysql.connector.connect(user='root', password='@27061378',
+                                       host='localhost',
+                                       database='sitedb')
+        cursors = conn.cursor()
+        cursors.execute(query, params)
+        resualt = cursors.fetchall()
+        return resualt
+
+    @staticmethod
+    def execute_elastic(query):
         conn = mysql.connector.connect(user='root', password='@27061378',
                                        host='localhost',
                                        database='sitedb')
@@ -76,3 +86,5 @@ class Database:
         cursors.execute(query)
         resualt = cursors.fetchall()
         return resualt
+
+
