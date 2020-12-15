@@ -73,6 +73,8 @@ def index_user_coupon():
         es.index(index="user_coupone-index", id=1, body=user_coupon)
 
         es.get(index='user_coupone-index', id=1)
+
+
 index_user()
 index_coupon()
 index_user_coupon()

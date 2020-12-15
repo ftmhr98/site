@@ -54,13 +54,14 @@ async def create_user_coupon(user_coupon: User_coupone, token):
         if permission.is_admin(user_id) is False:
             tb_user_coupon["name"] = user_coupon.name
             tb_user_coupon["user_id"] = user_coupon.user_id
-            print(tb_user_coupon)
+
             coupone.save_user(tb_user_coupon.get("user_id"), tb_user_coupon.get("name"))
-            print(tb_user_coupon)
+            return tb_user_coupon
+
 
         else:
             raise HTTPException(status_code=403, detail="Forbidden")
-        return tb_user_coupon
+
 
     except:
         raise HTTPException(status_code=401, detail="Unauthorized")

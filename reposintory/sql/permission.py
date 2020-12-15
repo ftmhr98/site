@@ -1,11 +1,10 @@
-from routers import user, coupone, permission, user_permission
+from routers import user, coupone, permission
 from reposintory import mysql1
 
 q1_user_permission = "SELECT * FROM User_permission"
 
 q2_user_permission = "INSERT INTO User_permission (user_id,permission_id) VALUES  (%s,%s)"
 q3_user_permission = "SELECT permission_id FROM User_permission WHERE user_id = %s"
-
 
 tb_access = []
 database_objct = mysql1.Database
@@ -39,8 +38,3 @@ def convert_int(nums):
 def convert_list(number):
     flat_1 = [x for ls in number for x in ls]
     return flat_1
-
-
-
-
-

@@ -33,13 +33,21 @@ async def check_permissions(token):
 
 
 @app.post("/permissions")
-async def creat_permission(permissions: Permissions):
-    tb_per["user_id"] = permissions.user_id
-
-    tb_per["id_permission"] = permissions.permission_id
-
-    permission.save_permission(tb_per.get("user_id"), tb_per.get("id_permission"))
-    return tb_per
+async def creat_permission(permissions: Permissions, token):
+    try:
+        if rediss.token_get() == token:
+            id_user = get_id(token)
+            x = permission.convert_list(id_user)
+            user_id = permission.convert_int(x)
+            if permission.is_admin(user_id):
+                tb_per["user_id"] = permissions.user_id
+                tb_per["id_permission"] = permissions.permission_id
+                permission.save_permission(tb_per.get("user_id"), tb_per.get("id_permission"))
+                return tb_per
+            else:
+                raise HTTPException(status_code=403, detail="Forbidden")
+    except:
+        raise HTTPException(status_code=401, detail="Unauthorized")
 
 
 if __name__ == "__main__":

@@ -6,9 +6,8 @@ from typing import Optional
 from helper.encode_decode import get_encode, get_decode
 from reposintory.rediss import token_set
 from datetime import datetime, timedelta
-from authentication import auth
+
 from reposintory.sql import users
-from reposintory.sql import permission
 
 tb_user = []
 
