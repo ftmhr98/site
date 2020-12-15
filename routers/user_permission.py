@@ -18,7 +18,7 @@ async def check_user_permission():
 
 
 @app.post("/user_permiss")
-async def creat_user_permission(user_permis: user_permission):
+async def creat_user_permission(user_permission: user_permission):
     tb_userpermission.append(user_permission.dict())
     return tb_userpermission
 

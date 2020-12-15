@@ -86,5 +86,3 @@ class Database:
         cursors.execute(query)
         resualt = cursors.fetchall()
         return resualt
-
-

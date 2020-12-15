@@ -19,8 +19,15 @@ app = FastAPI()
 @app.post("/permiss")
 async def check_permissions(token):
     if rediss.token_get() == token:
+
         id_user = get_id(token)
-        permission.check_permission(id_user)
+        x = permission.convert_list(id_user)
+        user_id = permission.convert_int(x)
+        if permission.is_admin(user_id):
+            return "ADMIN"
+        else:
+            return "NORMAL"
+
     else:
         raise HTTPException(status_code=408, detail="Request Timeout")
 
