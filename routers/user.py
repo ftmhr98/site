@@ -9,6 +9,7 @@ from datetime import datetime, timedelta
 from authentication import auth
 from reposintory.sql import users
 from reposintory.sql import permission
+
 tb_user = []
 
 app = FastAPI()
@@ -48,9 +49,12 @@ async def log_in(user: user_model.UserIn):
     hashed_password = hash.get_hash(password)
     id_user = users.pass_user(user_name, hashed_password)
     token = creat_token(id_user)
-    token_set(token)
-    print(token)
-    return token
+
+    decode_token = token.decode("utf-8")
+
+    token_set(decode_token)
+
+    return decode_token
 
 
 if __name__ == "__main__":

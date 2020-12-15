@@ -14,7 +14,8 @@ def get_encode(payload):
 
 def get_decode(payload):
     decode_params = jwt.decode(payload, secret_key, algorithm='HS256')
-    return decode_params
+
+    return str(decode_params)
 
 
 def get_id(payload):

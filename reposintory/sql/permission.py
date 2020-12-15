@@ -16,9 +16,8 @@ def save_permission(id_user, id_permission):
 
 
 def is_admin(user_id):
-    id_u = convert_int(user_id[0])
-    print(id_u)
     permission_id = database_objct.execute(q3_user_permission, user_id)
+    print(permission_id)
     id_user = convert_int(permission_id[0])
     if id_user == 1:
         print(id_user)
@@ -35,4 +34,15 @@ def convert_int(nums):
 
     an_integer = int(a_string)
 
+
     return an_integer
+
+
+def convert_list(number):
+    flat_1 = [x for ls in number for x in ls]
+    return flat_1
+
+
+
+
+

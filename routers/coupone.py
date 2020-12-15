@@ -25,29 +25,33 @@ app = FastAPI()
 
 @app.post("/coupon")
 async def create_coupon(coupon: coupon_model.Coupon, token):
-    print(rediss.token_get())
-    print(token)
-    print(rediss.token_get() is token)
+    try:
+        if rediss.token_get() == token:
+            id_user = get_id(token)
 
-    if rediss.token_get() == token:
-        print("hi")
-        id_user = get_id(token)
-        print(id_user)
-        if permission.is_admin(id_user):
+            x = permission.convert_list(id_user)
+            user_id = permission.convert_int(x)
+
+        if permission.is_admin(user_id):
             tb_coupon["name"] = coupon.name
             coupone.save_coupone(tb_coupon.get("name"))
             print(tb_coupon)
+            return tb_coupon
         else:
             raise HTTPException(status_code=403, detail="Forbidden")
-    return tb_coupon
+    except:
+        raise HTTPException(status_code=401, detail="Unauthorized")
 
 
 @app.post("/user_coupon")
 async def create_user_coupon(user_coupon: User_coupone, token):
-    if rediss.token_get() == token:
-        id_user = get_id(token)
-        print(id_user)
-        if permission.is_admin(id_user) is False:
+    try:
+        if rediss.token_get() == token:
+            id_user = get_id(token)
+            x = permission.convert_list(id_user)
+            user_id = permission.convert_int(x)
+
+        if permission.is_admin(user_id) is False:
             tb_user_coupon["name"] = user_coupon.name
             tb_user_coupon["user_id"] = user_coupon.user_id
             print(tb_user_coupon)
@@ -57,6 +61,9 @@ async def create_user_coupon(user_coupon: User_coupone, token):
         else:
             raise HTTPException(status_code=403, detail="Forbidden")
         return tb_user_coupon
+
+    except:
+        raise HTTPException(status_code=401, detail="Unauthorized")
 
 
 if __name__ == "__main__":
