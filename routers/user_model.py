@@ -6,7 +6,6 @@ class UserBase(BaseModel):
     name: str
 
 
-
 class UserIn(UserBase):
     password: str
 

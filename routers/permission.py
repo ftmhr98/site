@@ -4,6 +4,7 @@ import uvicorn
 from helper.encode_decode import get_id
 from reposintory import rediss
 from reposintory.sql import permission
+from helper.convert import convert_list, convert_int
 
 
 class Permissions(BaseModel):
@@ -21,8 +22,8 @@ async def check_permissions(token):
     if rediss.token_get() == token:
 
         id_user = get_id(token)
-        x = permission.convert_list(id_user)
-        user_id = permission.convert_int(x)
+        x = convert_list(id_user)
+        user_id = convert_int(x)
         if permission.is_admin(user_id):
             return "ADMIN"
         else:
@@ -37,8 +38,8 @@ async def creat_permission(permissions: Permissions, token):
     try:
         if rediss.token_get() == token:
             id_user = get_id(token)
-            x = permission.convert_list(id_user)
-            user_id = permission.convert_int(x)
+            x = convert_list(id_user)
+            user_id = convert_int(x)
             if permission.is_admin(user_id):
                 tb_per["user_id"] = permissions.user_id
                 tb_per["id_permission"] = permissions.permission_id

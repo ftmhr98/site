@@ -31,9 +31,6 @@ class Database:
             self.commit()
         self.connection.close()
 
-        # def execute(self, query, *params):
-        #     self.cursor.execute(query, params)
-
     def fetchall(self):
         return self.cursor.fetchall()
 
