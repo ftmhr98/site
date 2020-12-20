@@ -5,7 +5,7 @@ from helper.encode_decode import get_id
 from reposintory import rediss
 from reposintory.sql import permission
 from helper.convert import convert_list, convert_int
-from typing import Optional
+from starlette.requests import Request
 
 
 class Permissions(BaseModel):
@@ -19,8 +19,10 @@ app = FastAPI()
 
 
 @app.post("/permiss")
-async def check_permissions(token: str = Header(...)):
-    print(token)
+async def check_permissions(request: Request):
+    token: str = request.headers.get('Authorization')
+    token = token.replace("Bearer", "")
+    token = token[1:]
     if rediss.token_get() == token:
 
         id_user = get_id(token)
@@ -38,8 +40,10 @@ async def check_permissions(token: str = Header(...)):
 
 
 @app.post("/permissions")
-async def creat_permission(permissions: Permissions, token: str = Header(...)):
-    print(token)
+async def creat_permission(permissions: Permissions, request: Request):
+    token: str = request.headers.get('Authorization')
+    token = token.replace("Bearer", "")
+    token = token[1:]
     try:
         if rediss.token_get() == token:
             id_user = get_id(token)

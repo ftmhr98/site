@@ -3,6 +3,7 @@ from routers import user_model
 from helper import hash_tools as hash
 import uvicorn
 
+
 from helper.encode_decode import get_encode, get_decode, creat_token
 
 from reposintory.rediss import token_set
@@ -43,6 +44,7 @@ async def log_in(user: user_model.UserIn):
     decode_token = token.decode("utf-8")
 
     token_set(decode_token)
+    print(token_set(decode_token))
 
     return decode_token
 

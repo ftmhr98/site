@@ -6,7 +6,8 @@ from reposintory import rediss
 from helper.encode_decode import get_id
 from pydantic import BaseModel
 from helper.convert import convert_int, convert_list
-from typing import Optional
+
+from starlette.requests import Request
 
 
 class Coupon(BaseModel):
@@ -26,7 +27,10 @@ app = FastAPI()
 
 
 @app.post("/coupon")
-async def create_coupon(coupon: coupon_model.Coupon, token: Optional[str] = Header(...)):
+async def create_coupon(coupon: coupon_model.Coupon, request: Request):
+    token: str = request.headers.get('Authorization')
+    token = token.replace("Bearer", "")
+    token = token[1:]
     try:
         if rediss.token_get() == token:
             id_user = get_id(token)
@@ -47,7 +51,10 @@ async def create_coupon(coupon: coupon_model.Coupon, token: Optional[str] = Head
 
 
 @app.post("/user_coupon")
-async def create_user_coupon(user_coupon: User_coupone, token):
+async def create_user_coupon(user_coupon: User_coupone, request: Request):
+    token: str = request.headers.get('Authorization')
+    token = token.replace("Bearer", "")
+    token = token[1:]
     try:
         if rediss.token_get() == token:
             id_user = get_id(token)
