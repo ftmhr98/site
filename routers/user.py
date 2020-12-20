@@ -1,4 +1,4 @@
-from fastapi import FastAPI
+from fastapi import FastAPI, Header
 from routers import user_model
 from helper import hash_tools as hash
 import uvicorn
@@ -19,6 +19,9 @@ def save(user_in: user_model.UserIn):
     hashed_password = hash.get_hash(user_in.password)
     user_in_db = user_model.UserInDB(**user_in.dict(), hashed_password=hashed_password)
     return user_in_db
+
+
+
 
 
 @app.post("/users")

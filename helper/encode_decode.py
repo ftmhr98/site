@@ -24,6 +24,7 @@ def get_id(payload):
 
     user_id = decode_params.get("user_id")
     print(user_id)
+
     return user_id
 
 
@@ -33,7 +34,7 @@ def creat_token(user_id, expires_delta: Optional[timedelta] = None):
     if expires_delta:
         expire = datetime.utcnow() + expires_delta
     else:
-        expire = datetime.utcnow() + timedelta(minutes=20)
+        expire = datetime.utcnow() + timedelta(minutes=  20)
     to_encode.update({"exp": expire})
     encode_id = get_encode(to_encode)
     return encode_id

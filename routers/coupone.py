@@ -1,10 +1,12 @@
-from fastapi import FastAPI, HTTPException
+from fastapi import FastAPI, HTTPException, Header
 import uvicorn
 from reposintory.sql import coupone, permission
 from routers import coupon_model
 from reposintory import rediss
 from helper.encode_decode import get_id
 from pydantic import BaseModel
+from helper.convert import convert_int, convert_list
+from typing import Optional
 
 
 class Coupon(BaseModel):
@@ -24,15 +26,16 @@ app = FastAPI()
 
 
 @app.post("/coupon")
-async def create_coupon(coupon: coupon_model.Coupon, token):
+async def create_coupon(coupon: coupon_model.Coupon, token: Optional[str] = Header(...)):
     try:
         if rediss.token_get() == token:
             id_user = get_id(token)
 
-            x = permission.convert_list(id_user)
-            user_id = permission.convert_int(x)
+            x = convert_list(id_user)
+            user_id = convert_int(x)
 
         if permission.is_admin(user_id):
+            print(user_id)
             tb_coupon["name"] = coupon.name
             coupone.save_coupone(tb_coupon.get("name"))
             print(tb_coupon)
@@ -48,8 +51,8 @@ async def create_user_coupon(user_coupon: User_coupone, token):
     try:
         if rediss.token_get() == token:
             id_user = get_id(token)
-            x = permission.convert_list(id_user)
-            user_id = permission.convert_int(x)
+            x = convert_list(id_user)
+            user_id = convert_int(x)
 
         if permission.is_admin(user_id) is False:
             tb_user_coupon["name"] = user_coupon.name

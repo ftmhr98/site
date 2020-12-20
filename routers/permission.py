@@ -1,10 +1,11 @@
-from fastapi import FastAPI, HTTPException
+from fastapi import FastAPI, HTTPException, Header
 from pydantic import BaseModel
 import uvicorn
 from helper.encode_decode import get_id
 from reposintory import rediss
 from reposintory.sql import permission
 from helper.convert import convert_list, convert_int
+from typing import Optional
 
 
 class Permissions(BaseModel):
@@ -18,11 +19,14 @@ app = FastAPI()
 
 
 @app.post("/permiss")
-async def check_permissions(token):
+async def check_permissions(token: str = Header(...)):
+    print(token)
     if rediss.token_get() == token:
 
         id_user = get_id(token)
+        print(id_user)
         x = convert_list(id_user)
+        print(x)
         user_id = convert_int(x)
         if permission.is_admin(user_id):
             return "ADMIN"
@@ -34,7 +38,8 @@ async def check_permissions(token):
 
 
 @app.post("/permissions")
-async def creat_permission(permissions: Permissions, token):
+async def creat_permission(permissions: Permissions, token: str = Header(...)):
+    print(token)
     try:
         if rediss.token_get() == token:
             id_user = get_id(token)
